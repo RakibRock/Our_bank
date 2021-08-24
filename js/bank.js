@@ -3,8 +3,17 @@ function updateTotalField(totalFieldId, newAmount) {
   const amountTotal = document.getElementById(totalFieldId);
   const previousAmountText = amountTotal.innerText;
   const previousAmount = parseFloat(previousAmountText);
-  const newTotal = previousAmount + newAmount;
-  amountTotal.innerText = newTotal;
+  //getting the field for the total balance for access of variable for validation
+  const balanceTotal = document.getElementById("balance-total");
+  const previousBalanceText = balanceTotal.innerText;
+  const previousBalanceAmount = parseFloat(previousBalanceText);
+
+  if (newAmount < previousBalanceAmount) {
+    const newTotal = previousAmount + newAmount;
+    amountTotal.innerText = newTotal;
+  } else {
+    alert("You do not have sufficient balance!");
+  }
 }
 
 function updateTotalBalance(newAmount, isAdd) {
@@ -15,8 +24,10 @@ function updateTotalBalance(newAmount, isAdd) {
     const newBalanceTotal = previousBalanceAmount + newAmount;
     balanceTotal.innerText = newBalanceTotal;
   } else {
-    const newBalanceTotal = previousBalanceAmount - newAmount;
-    balanceTotal.innerText = newBalanceTotal;
+    if (newAmount < previousBalanceAmount) {
+      const newBalanceTotal = previousBalanceAmount - newAmount;
+      balanceTotal.innerText = newBalanceTotal;
+    }
   }
 }
 
